@@ -89,4 +89,28 @@ flutter:
   # see https://flutter.dev/to/font-from-package
   assets:
     - assets/pacceuil.png
-    - assets/log.png
+    - assets/logo.png
+    - assets/maison8.png
+    - assets/left-arrow.png
+    - assets/edit-info.png
+    - assets/chambre1.jpg
+    - assets/chambre2.jpg
+    - assets/salon1.jpg
+    - assets/salon2.jpg
+    - assets/sbain1.jpg
+    - assets/sbain2.jpg
+    - assets/moi.jpg
+    - assets/information.png
+    - assets/down-arrow.png
+    - assets/file.png
+    - assets/camera.png
+    - assets/add-photo.png
+    - assets/phone-call.png
+    - assets/telephone-handle-silhouette.png
+    - assets/mail.png
+
+    
+
+
+
+    

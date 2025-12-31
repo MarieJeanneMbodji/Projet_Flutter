@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:page_accueil/login.dart';
+import 'package:page_accueil/description.dart';
+import 'package:page_accueil/ajoutLogement.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,37 +45,40 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //le logo et nom de l'appli
-                // Image.asset("assets/log.png", width: 100, height: 120),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 80),
-                  //j'utilise Text.rich pour pouvoir styler les parties du texte séparément
+                Transform.translate(
+                  offset: const Offset(0, -10),
+                  child: Image.asset(
+                    "assets/logo.png",
+                    width: 100,
+                    height: 100,
+                  ),
+                ),
+                Transform.translate(
+                  offset: const Offset(0, -40),
                   child: Text.rich(
                     TextSpan(
                       children: [
                         TextSpan(
                           text: "Sen",
                           style: TextStyle(
-                            fontSize: 25,
-                            color: const Color.fromARGB(255, 253, 238, 123),
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 196, 165, 55),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "Logement",
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
+                          text: "DeukouWaay",
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
+
                 //champ texte pour description de l'appli
                 const SizedBox(height: 200),
                 Padding(
@@ -87,27 +91,28 @@ class _HomePageState extends State<HomePage> {
                           text: "Avec ",
                           style: TextStyle(
                             fontSize: 30,
-                            fontWeight: FontWeight.w600,
                             color: Colors.white,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "Sen",
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: const Color.fromARGB(255, 253, 238, 123),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
 
                         TextSpan(
-                          text: "Logement, ",
+                          text: "Sen",
                           style: TextStyle(
                             fontSize: 30,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                            color: const Color.fromARGB(255, 196, 165, 55),
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
+                        TextSpan(
+                          text: "DeukouWaay ",
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+
                         TextSpan(
                           text: "trouver votre chez-vous en un clic !!!",
                           style: TextStyle(
@@ -123,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 //boutton login
-                const SizedBox(height: 50),
+                const SizedBox(height: 100),
                 Container(
                   height: 40,
                   width: double.infinity,
@@ -131,7 +136,9 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Login()),
+                        MaterialPageRoute(
+                          builder: (context) => Ajoutlogement(),
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
