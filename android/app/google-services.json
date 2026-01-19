@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "918612417044",
+    "project_id": "sendeukouwaay-3c099",
+    "storage_bucket": "sendeukouwaay-3c099.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918612417044:android:8a96ac9cf0dc727aa42501",
+        "android_client_info": {
+          "package_name": "sn.ugb.SenDeukouWaay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCW9kQLXYGxsWU66bKamGwco4psgliDmks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
