@@ -23,7 +23,7 @@ class Description extends StatelessWidget {
 
             // zone Description
             Positioned(
-              top: 470,
+              top: 450,
               left: 0,
               right: 0,
               bottom: 0,

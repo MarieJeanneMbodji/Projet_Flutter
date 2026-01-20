@@ -31,7 +31,7 @@ class HeaderDescription extends StatelessWidget {
           ),
 
           Positioned(
-            top: 40,
+            top: 30,
             left: 10,
             child: IconButton(
               onPressed: () {},
@@ -39,7 +39,7 @@ class HeaderDescription extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: -15,
+            top: -20,
             left: 0,
             right: 0,
             child: Center(
@@ -53,7 +53,7 @@ class HeaderDescription extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => HomePage()),
                       );
                     },
-                    icon: Image.asset("assets/logo.png", height: 90),
+                    icon: Image.asset("assets/logo.png", height: 80),
                   ),
                 ],
               ),
@@ -61,7 +61,7 @@ class HeaderDescription extends StatelessWidget {
           ),
 
           Positioned(
-            top: 50,
+            top: 40,
             left: 0,
             right: 0,
             child: Center(
@@ -91,7 +91,7 @@ class HeaderDescription extends StatelessWidget {
           ),
 
           Positioned(
-            top: 40,
+            top: 30,
             right: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
