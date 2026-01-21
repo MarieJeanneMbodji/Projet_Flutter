@@ -34,7 +34,12 @@ class HeaderDescription extends StatelessWidget {
             top: 30,
             left: 10,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
               icon: Image.asset("assets/left-arrow.png", width: 24),
             ),
           ),
@@ -47,12 +52,7 @@ class HeaderDescription extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
-                    },
+                    onPressed: () {},
                     icon: Image.asset("assets/logo.png", height: 80),
                   ),
                 ],

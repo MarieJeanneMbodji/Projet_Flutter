@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sn.ugb.SenDeukouWaay">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:label="SenDeukouWaay"
         android:name="${applicationName}"
