@@ -115,6 +115,12 @@ flutter:
     - assets/phone-call.png
     - assets/telephone-handle-silhouette.png
     - assets/mail.png
+    - assets/maison3.jpg
+    - assets/maison4.jpg
+    - assets/maison2.jpg
+    - assets/maison6.jpg
+
+
 
     
 
@@ -124,7 +130,5 @@ flutter:
     - assets/bank.jpeg
     - assets/loge.jpeg
     - assets/loge.png
-    - assets/img/maison1.JPG
-    - assets/img/maison2.JPG
-    - assets/img/maison3.JPG
-    - assets/img/maison4.JPG
+    
+   

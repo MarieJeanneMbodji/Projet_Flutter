@@ -83,7 +83,7 @@ class HomePage extends StatelessWidget {
                       context,
                       ville: "Saint-Louis",
                       imageUrl:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Saintlouis_ile_pecheur.jpg/1024px-Saintlouis_ile_pecheur.jpg",
+                          "https://upload.wikimedia.org/wikipedia/commons/5/55/Saintlouis_pont_Faidherbe.jpg",
                       tags: ["Historique", "Fleuve", "Tourisme"],
                     ),
 

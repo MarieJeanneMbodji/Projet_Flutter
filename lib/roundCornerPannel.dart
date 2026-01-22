@@ -13,7 +13,7 @@ class RoundCornerPannel extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(244, 252, 238, 188),
+        color: const Color.fromARGB(255, 250, 250, 220),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(40),
           topRight: Radius.circular(40),

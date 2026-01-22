@@ -21,25 +21,25 @@ class _MaisonsPageState extends State<MaisonsPage> {
 
   final List<Maison> maisons = [
     Maison(
-      imageUrl: "assets/img/maison1.JPG",
+      imageUrl: "assets/maison8.png",
       price: 5000000,
       ville: "Dakar",
       quartier: "Almadies",
     ),
     Maison(
-      imageUrl: "assets/img/maison2.JPG",
+      imageUrl: "assets/maison3.jpg",
       price: 7000000,
       ville: "Dakar",
       quartier: "Keur Massar",
     ),
     Maison(
-      imageUrl: "assets/img/maison3.JPG",
+      imageUrl: "assets/maison2.jpg",
       price: 6000000,
       ville: "Thies",
       quartier: "Grand Standing",
     ),
     Maison(
-      imageUrl: "assets/img/maison4.JPG",
+      imageUrl: "assets/maison6.jpg",
       price: 10000000,
       ville: "Saint-Louis",
       quartier: "Hydrobase",
