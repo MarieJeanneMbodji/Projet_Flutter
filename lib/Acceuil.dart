@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'maisons_page.dart';
+import 'maisonsPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,14 +7,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 238, 235, 235),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -28,10 +27,7 @@ class HomePage extends StatelessWidget {
                       SizedBox(width: 4),
                       Text(
                         "N'Tji SANGARE",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
+                        style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
                     ],
                   ),
@@ -67,12 +63,11 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: ListView(
                   children: [
-
                     buildRegionCard(
                       context,
                       ville: "Dakar",
                       imageUrl:
-                      "https://discover-senegal.com/wp-content/uploads/2019/05/Monument_de_la_Renaissance_africaine2-2.jpg",
+                          "https://discover-senegal.com/wp-content/uploads/2019/05/Monument_de_la_Renaissance_africaine2-2.jpg",
                       tags: ["Capitale", "Belle ville", "Moderne"],
                     ),
 
@@ -80,7 +75,7 @@ class HomePage extends StatelessWidget {
                       context,
                       ville: "Thies",
                       imageUrl:
-                      "https://laviesenegalaise.com/wp-content/uploads/2025/01/Cite-Lamy-de-Thies-quartier-le-plus-propre-au-Senegal-1.jpg",
+                          "https://laviesenegalaise.com/wp-content/uploads/2025/01/Cite-Lamy-de-Thies-quartier-le-plus-propre-au-Senegal-1.jpg",
                       tags: ["1ère région", "Calme", "Accessible"],
                     ),
 
@@ -88,7 +83,7 @@ class HomePage extends StatelessWidget {
                       context,
                       ville: "Saint-Louis",
                       imageUrl:
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Saintlouis_ile_pecheur.jpg/1024px-Saintlouis_ile_pecheur.jpg",
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Saintlouis_ile_pecheur.jpg/1024px-Saintlouis_ile_pecheur.jpg",
                       tags: ["Historique", "Fleuve", "Tourisme"],
                     ),
 
@@ -96,7 +91,7 @@ class HomePage extends StatelessWidget {
                       context,
                       ville: "Kaolack",
                       imageUrl:
-                      "https://www.au-senegal.com/IMG/jpg/_ancienne_gouvernance_de_kaolack.jpg",
+                          "https://www.au-senegal.com/IMG/jpg/_ancienne_gouvernance_de_kaolack.jpg",
                       tags: ["Centre", "Commerce", "Marché"],
                     ),
 
@@ -104,7 +99,7 @@ class HomePage extends StatelessWidget {
                       context,
                       ville: "Ziguinchor",
                       imageUrl:
-                      "https://tourisme.gouv.sn/wp-content/uploads/2025/02/031-DSC_7676-1170x694.jpg",
+                          "https://tourisme.gouv.sn/wp-content/uploads/2025/02/031-DSC_7676-1170x694.jpg",
                       tags: ["Casamance", "Nature", "Paix"],
                     ),
                   ],
@@ -118,18 +113,16 @@ class HomePage extends StatelessWidget {
   }
 
   Widget buildRegionCard(
-      BuildContext context, {
-        required String ville,
-        required String imageUrl,
-        required List<String> tags,
-      }) {
+    BuildContext context, {
+    required String ville,
+    required String imageUrl,
+    required List<String> tags,
+  }) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (_) => MaisonsPage(ville: ville),
-          ),
+          MaterialPageRoute(builder: (_) => MaisonsPage(ville: ville)),
         );
       },
       child: Padding(
@@ -137,7 +130,7 @@ class HomePage extends StatelessWidget {
         child: HouseCard(
           imageUrl: imageUrl,
           title: ville.toUpperCase(),
-          address: "SENLOGEMENT",
+          address: "SenDeukouWaay",
           price: "Voir les maisons",
           tags: tags,
         ),
@@ -166,13 +159,12 @@ class HouseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFFFFfCA),
+        color: const Color.fromARGB(255, 251, 251, 205),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           // IMAGE
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
@@ -200,8 +192,11 @@ class HouseCard extends StatelessWidget {
 
                 Row(
                   children: [
-                    const Icon(Icons.location_on,
-                        color: Colors.amber, size: 16),
+                    const Icon(
+                      Icons.location_on,
+                      color: Colors.amber,
+                      size: 16,
+                    ),
                     const SizedBox(width: 4),
                     Text(address),
                   ],
@@ -211,8 +206,7 @@ class HouseCard extends StatelessWidget {
 
                 Row(
                   children: [
-                    const Icon(Icons.house,
-                        color: Colors.amber, size: 16),
+                    const Icon(Icons.house, color: Colors.amber, size: 16),
                     const SizedBox(width: 4),
                     Text(price),
                   ],
@@ -225,14 +219,16 @@ class HouseCard extends StatelessWidget {
                   children: tags
                       .map(
                         (tag) => Chip(
-                      backgroundColor: Colors.grey.shade800,
-                      label: Text(
-                        tag,
-                        style: const TextStyle(
-                            color: Colors.white, fontSize: 12),
-                      ),
-                    ),
-                  )
+                          backgroundColor: Colors.grey.shade800,
+                          label: Text(
+                            tag,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      )
                       .toList(),
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_accueil/main.dart';
+import 'package:page_accueil/maisonsPage.dart';
 
 class HeaderDescription extends StatelessWidget {
   final String backgroundImagePath;
@@ -35,10 +36,7 @@ class HeaderDescription extends StatelessWidget {
             left: 10,
             child: IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
+                Navigator.pop(context);
               },
               icon: Image.asset("assets/left-arrow.png", width: 24),
             ),

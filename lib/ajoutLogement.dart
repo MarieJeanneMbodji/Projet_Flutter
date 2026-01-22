@@ -80,7 +80,7 @@ class _AjoutlogementState extends State<Ajoutlogement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(244, 254, 246, 217),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Stack(
