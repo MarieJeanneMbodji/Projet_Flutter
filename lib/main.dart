@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_accueil/ajoutLogement.dart';
+import 'package:page_accueil/headerPages.dart';
 import 'package:page_accueil/loginPage.dart';
 
 void main() {
@@ -33,6 +34,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -45,45 +47,12 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  //le logo et nom de l'appli
-                  Transform.translate(
-                    offset: const Offset(0, -10),
-                    child: Image.asset(
-                      "assets/logo.png",
-                      width: 100,
-                      height: 100,
-                    ),
-                  ),
-                  Transform.translate(
-                    offset: const Offset(0, -40),
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Sen",
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 196, 165, 55),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "DeukouWaay",
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
+                  //zone header
+                  Headerpages(height: height * 0.5),
                   //champ texte pour description de l'appli
-                  const SizedBox(height: 200),
+                  const SizedBox(height: 10),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 80),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
 
                     child: Text.rich(
                       TextSpan(
@@ -129,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                   //boutton login
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 60),
                   Container(
                     height: 40,
                     width: double.infinity,
@@ -160,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                   //boutton texte singn in
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   Container(
                     child: TextButton(
                       onPressed: () {},

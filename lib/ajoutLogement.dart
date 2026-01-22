@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:page_accueil/main.dart';
+import 'package:page_accueil/headerPages.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -80,71 +80,49 @@ class _AjoutlogementState extends State<Ajoutlogement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Stack(
             children: [
               Column(
                 children: [
-                  Center(
-                    child: Image.asset(
-                      "assets/logo.png",
-                      width: 100,
-                      height: 100,
-                    ),
-                  ),
-                  Transform.translate(
-                    offset: const Offset(0, -35),
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Sen",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Color.fromARGB(255, 196, 165, 55),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "DeukouWaay",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  //zone header
+                  Headerpages(height: 110),
+
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Transform.translate(
-                        offset: Offset(15, -20),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
                         child: IconButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(220, 181, 136, 2),
+                            backgroundColor: const Color.fromARGB(
+                              220,
+                              181,
+                              136,
+                              2,
+                            ),
                             foregroundColor: Colors.white,
                           ),
                           icon: const Icon(Icons.add),
                         ),
                       ),
-                      Transform.translate(
-                        offset: Offset(20, -20),
-                        child: Text(
-                          "Ajouter un logement",
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Color.fromARGB(220, 181, 136, 2),
-                            fontStyle: FontStyle.italic,
-                          ),
+
+                      const SizedBox(width: 8),
+
+                      Text(
+                        "Ajouter un logement",
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: const Color.fromARGB(220, 181, 136, 2),
+                          fontStyle: FontStyle.italic,
                         ),
                       ),
                     ],
                   ),
+
                   const Divider(color: Color(0xFFB08D57)),
                   // const SizedBox(height: 5),
                   Container(
