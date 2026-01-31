@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_accueil/ajoutLogement.dart';
 import 'package:page_accueil/headerPages.dart';
 import 'package:page_accueil/mesLogement.dart';
+import 'package:page_accueil/pageInscription.dart';
 
 void main() {
   runApp(const MyApp());
@@ -97,11 +98,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  //boutton login
+                  //boutton se connecter
                   const SizedBox(height: 60),
                   Container(
                     height: 40,
-                    width: double.infinity,
+                    width: 250,
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -121,25 +122,32 @@ class _HomePageState extends State<HomePage> {
                         foregroundColor: Colors.white,
                       ),
                       child: Text(
-                        "Login",
+                        "Se connecter",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
 
-                  //boutton texte singn in
-                  const SizedBox(height: 30),
+                  //boutton texte s'inscrire
+                  const SizedBox(height: 20),
                   Container(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pageinscription(),
+                          ),
+                        );
+                      },
                       child: Text(
-                        "Sign in",
+                        "S'inscrire",
                         style: TextStyle(
                           color: const Color.fromARGB(255, 179, 169, 87),
-                          fontSize: 25,
+                          fontSize: 28,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
