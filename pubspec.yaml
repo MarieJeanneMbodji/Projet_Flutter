@@ -119,14 +119,11 @@ flutter:
     - assets/maison4.jpg
     - assets/maison2.jpg
     - assets/maison6.jpg
+    - assets/house.png
+    - assets/google.png
+    - assets/facebook.png
+    - assets/apple.png
 
-
-
-    
-
-
-
-    
     - assets/bank.jpeg
     - assets/loge.jpeg
     - assets/loge.png

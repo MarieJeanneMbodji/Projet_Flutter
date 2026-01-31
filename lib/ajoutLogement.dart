@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_accueil/headerPages.dart';
+import 'main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -733,6 +734,18 @@ class _AjoutlogementState extends State<Ajoutlogement> {
 
                   const SizedBox(height: 15),
                 ],
+              ),
+
+              // la flèche retour
+              Positioned(
+                top: 20,
+                left: 10,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Image.asset("assets/left-arrow.png", width: 24),
+                ),
               ),
             ],
           ),
