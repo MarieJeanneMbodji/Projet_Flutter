@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:page_accueil/HeaderDescription.dart';
 import 'package:page_accueil/roundCornerPannel.dart';
+import 'maison.dart';
 
 class Description extends StatelessWidget {
-  const Description({super.key});
+  final Maison maison;
+  const Description({super.key, required this.maison});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class Description extends StatelessWidget {
           children: [
             //zone header
             HeaderDescription(
-              backgroundImagePath: "assets/maison8.png",
+              backgroundImagePath: maison.imageUrl,
               height: height * 0.5,
             ),
 
@@ -64,16 +66,13 @@ class Description extends StatelessWidget {
         ),
 
         const SizedBox(height: 8),
-        const Text(
-          "Ajkljhgjertyuiimllkjhgfdfjkloiuytertyuiopoiuytrezqsdf,nbvcxwqsdfghjkl...",
-          style: TextStyle(fontSize: 15),
-        ),
+        Text(maison.description, style: const TextStyle(fontSize: 15)),
 
         Text.rich(
           TextSpan(
             children: [
-              TextSpan(
-                text: "Prix: ",
+              const TextSpan(
+                text: "Prix : ",
                 style: TextStyle(
                   fontSize: 25,
                   color: Color.fromARGB(220, 181, 136, 2),
@@ -81,16 +80,16 @@ class Description extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: "2.000.000FCFA",
-                style: TextStyle(
+                text: "${maison.price} FCFA",
+                style: const TextStyle(
                   fontSize: 25,
-                  color: const Color.fromARGB(209, 27, 27, 27),
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ],
           ),
         ),
+
         const Divider(color: Color(0xFFB08D57)),
 
         GridView.builder(

@@ -25,26 +25,53 @@ class _MaisonsPageState extends State<MaisonsPage> {
       price: 5000000,
       ville: "Dakar",
       quartier: "Almadies",
+      description: "Belle villa moderne avec 4 chambres, piscine et jardin.",
     ),
     Maison(
       imageUrl: "assets/maison3.jpg",
       price: 7000000,
       ville: "Dakar",
       quartier: "Keur Massar",
+      description: "Maison familiale spacieuse proche des commodités.",
     ),
     Maison(
       imageUrl: "assets/maison2.jpg",
       price: 6000000,
       ville: "Thies",
       quartier: "Grand Standing",
+      description: "Grande maison, spacieuse, dans un quartier trés calme",
     ),
     Maison(
       imageUrl: "assets/maison6.jpg",
       price: 10000000,
       ville: "Saint-Louis",
-      quartier: "Hydrobase",
+      quartier: "Gualléle",
+      description: "Maison trés chaleureuse et accueillante",
     ),
-    // ajoute d'autres maisons ici
+
+    Maison(
+      imageUrl: "assets/maison9.jpg",
+      price: 50000000,
+      ville: "Saint-Louis",
+      quartier: "Guet Ndar",
+      description: "Maison moderne avec une magnifique vue",
+    ),
+
+    Maison(
+      imageUrl: "assets/maison10.jpg",
+      price: 20000000,
+      ville: "Kaolack",
+      quartier: "Ndagane",
+      description: "Maison avec piscine situé dans un quartier calme",
+    ),
+
+    Maison(
+      imageUrl: "assets/maison11.jpg",
+      price: 8000000,
+      ville: "Ziguinchor",
+      quartier: "l'Escale",
+      description: "Jolie maison meublée située dans un quartier résidentielle",
+    ),
   ];
 
   @override
@@ -244,7 +271,9 @@ class _MaisonsPageState extends State<MaisonsPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Description()),
+                      MaterialPageRoute(
+                        builder: (context) => Description(maison: maison),
+                      ),
                     );
                   },
                   child: buildHouseCard(maison),

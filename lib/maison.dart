@@ -5,6 +5,8 @@ class Maison {
   final int price;
   final String ville;
   final String quartier;
+  final String description;
+
   bool isFavorite;
 
   Maison({
@@ -12,6 +14,7 @@ class Maison {
     required this.price,
     required this.ville,
     required this.quartier,
+    required this.description,
     this.isFavorite = false,
   });
 }
