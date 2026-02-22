@@ -1,30 +1,120 @@
 import 'package:flutter/material.dart';
-import 'acceuil.dart'; // Page d’accueil (HomePage)
+import 'package:page_accueil/pageInscription.dart';
+import 'HomePageAcheteur.dart';
+import 'HomePageVendeur.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-    );
-  }
-}
-
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool obscurePassword = true;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> loginUser() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Veuillez remplir tous les champs."),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+      return;
+    }
+
+    // Afficher un loader pendant la connexion
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator()),
+    );
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      if (!mounted) return;
+
+      Navigator.pop(context);
+      final uid = FirebaseAuth.instance.currentUser!.uid;
+
+      final doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .get();
+
+      final role = doc['role'];
+
+      if (!mounted) return;
+
+      Navigator.pop(context);
+
+      if (role == "seller") {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePageVendeur()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePageAcheteur()),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+
+      debugPrint("Firebase error code: ${e.code}");
+
+      String message;
+
+      switch (e.code) {
+        case 'user-not-found':
+        case 'invalid-email':
+        case 'invalid-credential':
+          message =
+              "Aucun compte trouvé avec cet email. Veuillez vous inscrire.";
+          break;
+
+        case 'wrong-password':
+          message = "Mot de passe incorrect. Veuillez réessayer.";
+          break;
+
+        case 'too-many-requests':
+          message = "Trop de tentatives. Veuillez réessayer plus tard.";
+          break;
+
+        default:
+          message = "Erreur: ${e.message}";
+      }
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message), backgroundColor: Colors.redAccent),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
@@ -90,7 +180,7 @@ class LoginPage extends StatelessWidget {
 
                             SizedBox(width: 5),
                             Text(
-                              "SenLogement",
+                              "SenDeukouWaay",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -144,7 +234,7 @@ class LoginPage extends StatelessWidget {
                               125,
                               123,
                               123,
-                            )!.withOpacity(0.7), // fond semi-transparent
+                            )!.withOpacity(0.7),
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
@@ -156,41 +246,32 @@ class LoginPage extends StatelessWidget {
                           ),
                           child: TextField(
                             controller: passwordController,
-                            obscureText: true,
-                            decoration: const InputDecoration(
+                            obscureText: obscurePassword,
+                            decoration: InputDecoration(
                               border: InputBorder.none,
-                              labelText: "PassWord",
-                              prefixIcon: Icon(Icons.lock_outline),
-                              suffixIcon: Icon(Icons.visibility_off_outlined),
+                              labelText: "Mot de passe",
+                              prefixIcon: const Icon(Icons.lock_outline),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  obscurePassword
+                                      ? Icons.visibility_off_outlined
+                                      : Icons.visibility_outlined,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    obscurePassword = !obscurePassword;
+                                  });
+                                },
+                              ),
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 60),
 
                         GestureDetector(
-                          onTap: () {
-                            if (emailController.text.isEmpty ||
-                                passwordController.text.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    "Veuillez remplir tous les champs.",
-                                  ),
-                                  backgroundColor: Colors.redAccent,
-                                ),
-                              );
-                            } else {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
-                                ),
-                              );
-                            }
-                          },
+                          onTap: loginUser, // appel de la fonction loginUser
                           child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 50),
+                            margin: const EdgeInsets.symmetric(horizontal: 50),
                             height: 50,
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -199,11 +280,11 @@ class LoginPage extends StatelessWidget {
                             ),
                             child: const Center(
                               child: Text(
-                                "Sign in",
+                                "Se connecter",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                  fontSize: 20,
                                 ),
                               ),
                             ),
@@ -212,12 +293,22 @@ class LoginPage extends StatelessWidget {
 
                         const SizedBox(height: 30),
 
-                        const Text(
-                          "Register",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 181, 156, 32),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 23,
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PageInscription(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "S'inscrire",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 181, 156, 32),
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],

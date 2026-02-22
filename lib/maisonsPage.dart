@@ -77,7 +77,7 @@ class _MaisonsPageState extends State<MaisonsPage> {
   @override
   void initState() {
     super.initState();
-    maisonsFiltrees = maisons.where((m) => m.ville == widget.ville).toList();
+    appliquerFiltres();
   }
 
   void appliquerFiltres() {
@@ -87,7 +87,7 @@ class _MaisonsPageState extends State<MaisonsPage> {
 
     setState(() {
       maisonsFiltrees = maisons.where((maison) {
-        return maison.ville == widget.ville &&
+        return maison.ville.toLowerCase() == widget.ville.toLowerCase() &&
             maison.quartier.toLowerCase().contains(query) &&
             maison.price >= minPrice &&
             maison.price <= maxPrice;
@@ -97,7 +97,7 @@ class _MaisonsPageState extends State<MaisonsPage> {
 
   List<String> getSuggestions() {
     return maisons
-        .where((m) => m.ville == widget.ville)
+        .where((m) => m.ville.toLowerCase() == widget.ville.toLowerCase())
         .map((m) => m.quartier)
         .toSet()
         .toList();

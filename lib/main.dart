@@ -4,8 +4,13 @@ import 'package:page_accueil/headerPages.dart';
 import 'package:page_accueil/loginPage.dart';
 import 'package:page_accueil/mesLogement.dart';
 import 'package:page_accueil/pageInscription.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'auth_gate.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -21,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: AuthGate(),
     );
   }
 }
@@ -138,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Pageinscription(),
+                            builder: (context) => PageInscription(),
                           ),
                         );
                       },

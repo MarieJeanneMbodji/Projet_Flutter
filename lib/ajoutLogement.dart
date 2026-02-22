@@ -3,6 +3,9 @@ import 'package:page_accueil/headerPages.dart';
 import 'main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Ajoutlogement extends StatefulWidget {
   const Ajoutlogement({super.key});
@@ -12,6 +15,13 @@ class Ajoutlogement extends StatefulWidget {
 }
 
 class _AjoutlogementState extends State<Ajoutlogement> {
+  final TextEditingController chambresCtrl = TextEditingController();
+  final TextEditingController prixCtrl = TextEditingController();
+  final TextEditingController toilettesCtrl = TextEditingController();
+  final TextEditingController surfaceCtrl = TextEditingController();
+  final TextEditingController descCtrl = TextEditingController();
+  final TextEditingController phoneCtrl = TextEditingController();
+  final TextEditingController emailCtrl = TextEditingController();
   String? regionSelectionnee;
 
   final List<String> regions = [
@@ -76,6 +86,67 @@ class _AjoutlogementState extends State<Ajoutlogement> {
         images.add(File(image.path));
       });
     }
+  }
+
+  //chargement des images dans Firestore
+
+  Future<List<String>> uploadImages() async {
+    List<String> urls = [];
+
+    for (var img in images) {
+      final ref = FirebaseStorage.instance.ref().child(
+        'logements/${DateTime.now().millisecondsSinceEpoch}.jpg',
+      );
+
+      await ref.putFile(img);
+      final url = await ref.getDownloadURL();
+      urls.add(url);
+    }
+
+    return urls;
+  }
+
+  //enregistrement des logement dans firestore
+  Future<void> enregistrerLogement() async {
+    if (regionSelectionnee == null ||
+        villeSelectionnee == null ||
+        TypeLogementSelectionnee == null ||
+        prixCtrl.text.isEmpty ||
+        images.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Veuillez remplir tous les champs obligatoires"),
+        ),
+      );
+      return;
+    }
+
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
+    final imageUrls = await uploadImages();
+
+    await FirebaseFirestore.instance.collection('logements').add({
+      "ownerId": uid,
+      "region": regionSelectionnee,
+      "ville": villeSelectionnee,
+      "quartier": quartierSelectione,
+      "type": TypeLogementSelectionnee,
+      "chambres": chambresCtrl.text,
+      "price": double.parse(prixCtrl.text),
+      "toilettes": toilettesCtrl.text,
+      "surface": surfaceCtrl.text,
+      "description": descCtrl.text,
+      "phone": phoneCtrl.text,
+      "email": emailCtrl.text,
+      "images": imageUrls,
+      "createdAt": FieldValue.serverTimestamp(),
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Logement ajouté avec succès")),
+    );
+
+    Navigator.pop(context);
   }
 
   @override
@@ -437,14 +508,12 @@ class _AjoutlogementState extends State<Ajoutlogement> {
                                         ),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      child: const TextField(
-                                        decoration: InputDecoration(
+                                      child: TextField(
+                                        controller: chambresCtrl,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
                                           border: InputBorder.none,
                                           labelText: "Nombre de chambres",
-                                          labelStyle: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
                                         ),
                                       ),
                                     ),
@@ -467,14 +536,12 @@ class _AjoutlogementState extends State<Ajoutlogement> {
                                         ),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      child: const TextField(
-                                        decoration: InputDecoration(
+                                      child: TextField(
+                                        controller: prixCtrl,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
                                           border: InputBorder.none,
                                           labelText: "Prix",
-                                          labelStyle: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
                                         ),
                                       ),
                                     ),
@@ -503,14 +570,12 @@ class _AjoutlogementState extends State<Ajoutlogement> {
                                         ),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      child: const TextField(
-                                        decoration: InputDecoration(
+                                      child: TextField(
+                                        controller: toilettesCtrl,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
                                           border: InputBorder.none,
                                           labelText: "Nombre de toilettes",
-                                          labelStyle: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
                                         ),
                                       ),
                                     ),
@@ -533,14 +598,12 @@ class _AjoutlogementState extends State<Ajoutlogement> {
                                         ),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      child: const TextField(
-                                        decoration: InputDecoration(
+                                      child: TextField(
+                                        controller: surfaceCtrl,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
                                           border: InputBorder.none,
                                           labelText: "Superficie(m2)",
-                                          labelStyle: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
                                         ),
                                       ),
                                     ),
@@ -563,13 +626,11 @@ class _AjoutlogementState extends State<Ajoutlogement> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: TextField(
-                                decoration: InputDecoration(
+                                controller: descCtrl,
+                                maxLines: 3,
+                                decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   labelText: "Description",
-                                  labelStyle: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
                                 ),
                               ),
                             ),
@@ -671,17 +732,11 @@ class _AjoutlogementState extends State<Ajoutlogement> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: phoneCtrl,
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
-                        labelText: "Téléphone/Whatshapp",
-                        labelStyle: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        prefixIcon: Image.asset(
-                          "assets/telephone-handle-silhouette.png",
-                          width: 6,
-                        ),
+                        labelText: "Téléphone/Whatsapp",
                       ),
                     ),
                   ),
@@ -701,14 +756,11 @@ class _AjoutlogementState extends State<Ajoutlogement> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: emailCtrl,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         labelText: "Email",
-                        labelStyle: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        prefixIcon: Image.asset("assets/mail.png", width: 6),
                       ),
                     ),
                   ),
@@ -716,7 +768,7 @@ class _AjoutlogementState extends State<Ajoutlogement> {
                   const SizedBox(height: 15),
                   SizedBox(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: enregistrerLogement,
                       icon: const Icon(Icons.check_box_rounded),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(220, 181, 136, 2),
